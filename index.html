@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartWork AI - Agentic Productivity Assistant</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #1e88e5;
+      color: white;
+      padding: 15px 20px;
+      font-size: 1.5em;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logout {
+      background: #ef5350;
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .logout:hover { background: #c62828; }
+
+    /* LOGIN PAGE */
+    #login-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(to right, #2196f3, #64b5f6);
+      color: white;
+    }
+    #login-box {
+      background: white;
+      color: #333;
+      padding: 30px;
+      border-radius: 12px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+    #login-button {
+      background: #1e88e5;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    #login-button:hover { background: #1565c0; }
+
+    /* DASHBOARD */
+    #dashboard { display: none; }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      margin: 20px;
+      height: calc(100vh - 120px);
+    }
+    .sidebar {
+      width: 250px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+      border-radius: 10px;
+      height: fit-content;
+    }
+    .agent {
+      background: #e3f2fd;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .agent:hover { background: #bbdefb; }
+
+    .chat-area {
+      flex: 1;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-left: 20px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chat-box {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .message {
+      padding: 10px 15px;
+      border-radius: 12px;
+      max-width: 70%;
+    }
+
+    .user {
+      background: #e3f2fd;
+      align-self: flex-end;
+    }
+
+    .bot {
+      background: #f1f8e9;
+      color: #2e7d32;
+      align-self: flex-start;
+    }
+
+    .input-area {
+      display: flex;
+      border-top: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    .input-area input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .input-area button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      background: #1e88e5;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .input-area button:hover { background: #1565c0; }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      color: #777;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN PAGE -->
+  <div id="login-page">
+    <div id="login-box">
+      <h2>Welcome to SmartWork AI</h2>
+      <p>Login to access your productivity dashboard</p>
+      <input type="text" id="username" placeholder="Enter username" />
+      <input type="password" id="password" placeholder="Enter password" />
+      <button id="login-button" onclick="login()">Login</button>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dashboard">
+    <header>
+      🤖 SmartWork AI — Agentic Productivity Assistant
+      <button class="logout" onclick="logout()">Logout</button>
+    </header>
+
+    <div class="container">
+      <div class="sidebar">
+        <h2>AI Agents</h2>
+        <div class="agent" onclick="selectAgent('email')">📧 Email Summarizer</div>
+        <div class="agent" onclick="selectAgent('schedule')">📅 Scheduler</div>
+        <div class="agent" onclick="selectAgent('report')">📊 Report Generator</div>
+      </div>
+
+      <div class="chat-area">
+        <div class="chat-box" id="chat-box">
+          <div class="message bot">👋 Hi! I’m SmartWork AI. Select an agent and type your request below.</div>
+        </div>
+        <div class="input-area">
+          <input id="user-input" type="text" placeholder="Type your message here..." />
+          <button onclick="sendMessage()">Send</button>
+        </div>
+      </div>
+    </div>
+
+    <footer>© 2025 SmartWork AI | Designed for EY Techathon 6.0</footer>
+  </div>
+
+  <script>
+    let selectedAgent = "";
+
+    function login() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (username === "admin" && password === "1234") {
+        document.getElementById("login-page").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
+      } else {
+        alert("Invalid credentials! Try username: admin | password: 1234");
+      }
+    }
+
+    function logout() {
+      document.getElementById("dashboard").style.display = "none";
+      document.getElementById("login-page").style.display = "flex";
+      document.getElementById("username").value = "";
+      document.getElementById("password").value = "";
+    }
+
+    function selectAgent(agent) {
+      selectedAgent = agent;
+      const chatBox = document.getElementById("chat-box");
+      let agentName = {
+        email: "Email Summarizer",
+        schedule: "Scheduler",
+        report: "Report Generator"
+      }[agent];
+      chatBox.innerHTML += `<div class="message bot">✅ Switched to <b>${agentName}</b> agent.</div>`;
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function sendMessage() {
+      const inputField = document.getElementById("user-input");
+      const message = inputField.value.trim();
+      if (!message) return;
+
+      const chatBox = document.getElementById("chat-box");
+      chatBox.innerHTML += `<div class="message user">${message}</div>`;
+      inputField.value = "";
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      setTimeout(() => {
+        let response = "";
+
+        if (!selectedAgent) {
+          response = "⚠ Please select an agent first.";
+        } else if (selectedAgent === "email") {
+          response = "📩 Email Summary: " + message.slice(0, 60) + "...";
+        } else if (selectedAgent === "schedule") {
+          response = "🗓 Task scheduled successfully at 10:00 AM tomorrow.";
+        } else if (selectedAgent === "report") {
+          const wordCount = message.split(" ").length;
+          response = `📊 Report generated: ${wordCount} words analyzed.`;
+        }
+
+        chatBox.innerHTML += `<div class="message bot">${response}</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }, 600);
+    }
+  </script>
+</body>
+</html>
