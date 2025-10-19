@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>i/BPS — Basis Points (EY Techathon 6.0)</title>
+
+  <!-- Reveal.js from CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/theme/sky.css" id="theme">
+  <style>
+    /* small custom styles */
+    .big { font-size: 2.2rem; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace; }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <h1>i / BPS</h1>
+        <h3>Understanding Basis Points</h3>
+        <p>EY Techathon 6.0 — Presentation template</p>
+        <p><small>Author: <em>Mohmina Shaik</em></small></p>
+      </section>
+
+      <section>
+        <h2>What are BPS?</h2>
+        <p class="big">One basis point (bps) = <strong>0.01%</strong> = 0.0001 (decimal)</p>
+        <ul>
+          <li>Used to express small changes in interest rates, fees, yields.</li>
+          <li>100 bps = 1%</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Why use basis points?</h2>
+        <ul>
+          <li>Removes ambiguity when discussing small percentage changes.</li>
+          <li>Useful in finance: loans, bonds, margins, expense ratios.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Conversion examples</h2>
+        <p class="mono">Calculate: 50 bps → ?%</p>
+        <p class="big">50 bps = 50 × 0.01% = <strong>0.50%</strong></p>
+        <p class="mono">Decimal: 0.50% = 0.005</p>
+      </section>
+
+      <section>
+        <h2>Quick formula</h2>
+        <p class="mono">percentage = bps × 0.01%</p>
+        <p class="mono">decimal = bps × 0.0001</p>
+      </section>
+
+      <section>
+        <h2>Practical example</h2>
+        <p>Loan interest increases from 5.00% to 5.25%</p>
+        <p class="big">Change = 25 bps</p>
+        <p>Explain monetary impact on a ₹1,00,00,000 loan — include calculations in your talk.</p>
+      </section>
+
+      <section>
+        <h2>Code snippet (Python)</h2>
+        <pre class="mono">def bps_to_percentage(bps):
+    return bps * 0.01
+
+# example
+print(bps_to_percentage(25))  # -> 0.25%</pre>
+      </section>
+
+      <section>
+        <h2>How this ties to EY Techathon</h2>
+        <ul>
+          <li>Precision matters in financial AI and Agentic AI systems.</li>
+          <li>Small rate moves (bps) can change model outputs and decisions.</li>
+          <li>Design systems that reason in bps when needed.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Resources & references</h2>
+        <ol>
+          <li>Investopedia — Basis point definition</li>
+          <li>Corporate Finance Institute — BPS guide</li>
+          <li>Include links to your calculations / dataset</li>
+        </ol>
+      </section>
+
+      <!-- ✨ NEW SLIDE: GitHub Repository Link -->
+      <section>
+        <h2>GitHub Repository</h2>
+        <p>You can view our full project and code here:</p>
+        <p>
+          <a href="https://github.com/<your-username>/ey-techathon-ibps" 
+             target="_blank" 
+             style="font-size:1.3rem; color:#007acc; text-decoration:underline;">
+             🔗 View Code on GitHub
+          </a>
+        </p>
+        <p>
+          <a href="https://<your-username>.github.io/ey-techathon-ibps/" 
+             target="_blank" 
+             style="font-size:1.2rem;">
+             ▶️ Live Presentation
+          </a>
+        </p>
+      </section>
+
+      <section>
+        <h2>Thank you</h2>
+        <p>Questions?</p>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      center: true,
+      transition: 'slide'
+    });
+  </script>
+</body>
+</html>
